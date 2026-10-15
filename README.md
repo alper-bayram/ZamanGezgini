@@ -1,13 +1,24 @@
-# RetroChatbotProject
+# ZamanGezgini
 
-Kendini 1990'larda (1996) yaşıyor sanan, Gemini destekli bir retro sohbet botu.
-Eğitim amaçlı bir projedir.
+Gemini destekli, üç farklı zaman dönemine göre kişilik değiştiren bir sohbet
+botu. Eğitim amaçlı bir projedir.
+
+- **📼 1996 — RetroBot:** Kendini 1990'larda yaşıyor sanıyor, dial-up modem
+  ve VHS referanslarıyla konuşuyor.
+- **🚀 2036 — NeoBot:** Nöral arayüzler, kuantum bulut ve Mars kolonilerinin
+  normal olduğu bir gelecekte yaşıyor.
+- **🟢 3000 — NEXUS:** Bilincini dijital Şebeke'ye yüklemiş, Matrix tarzı
+  kayan arka planla karşılıyor.
+
+Arayüzdeki sağ üstteki mod seçiciyle (1996 / 2036 / 3000) anında bir
+dönemden diğerine geçilebiliyor; hem botun kişiliği hem de sitenin tüm
+görsel teması o döneme göre değişiyor.
 
 ## Yapı
 
 ```
 backend/    FastAPI servisi, Gemini API'ye istek atar, frontend'i de servis eder
-frontend/   Düz HTML/CSS/JS, 90'lar tarzı arayüz
+frontend/   Düz HTML/CSS/JS, üç döneme özgü üç ayrı tema
 ```
 
 ## Kurulum
@@ -23,7 +34,7 @@ frontend/   Düz HTML/CSS/JS, 90'lar tarzı arayüz
 
    ```
    GEMINI_API_KEY=senin_api_keyin
-   GEMINI_MODEL=gemini-flash-latest
+   GEMINI_MODEL=gemini-flash-lite-latest
    ```
 
 2. Bağımlılıkları kur (proje kökünde zaten bir `.venv` var):
@@ -44,8 +55,14 @@ frontend/   Düz HTML/CSS/JS, 90'lar tarzı arayüz
 
 ## Notlar
 
-- `GEMINI_MODEL` varsayılanı `gemini-flash-latest` — Google'ın her zaman en
-  güncel Flash modeline işaret eden alias'ı. İstersen `.env` içinden
+- `GEMINI_MODEL` varsayılanı `gemini-flash-lite-latest` — hafif ve ayrı
+  kotası olan bir model. Ücretsiz katmanda büyük modellerin (örn.
+  `gemini-flash-latest`) günlük istek kotası çok düşük olabiliyor; kota
+  hatası alırsan `.env` içinden farklı bir model deneyebilirsin.
+- Her dönemin kişiliği `backend/persona.py` içindeki üç ayrı sistem
+  promptunda tanımlı (`RETRO_SYSTEM_PROMPT`, `FUTURE_SYSTEM_PROMPT`,
+  `YEAR3000_SYSTEM_PROMPT`); istersen orayı düzenleyerek karakterleri
   değiştirebilirsin.
-- Botun 1990'lar kişiliği `backend/persona.py` içindeki sistem promptunda
-  tanımlı, istersen orayı düzenleyerek karakteri değiştirebilirsin.
+- Hangi personanın kullanılacağı `/api/chat` isteğindeki `mode` alanıyla
+  (`retro` / `future` / `year3000`) belirleniyor; frontend bunu mod
+  seçiciye göre otomatik gönderiyor.
