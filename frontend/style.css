@@ -1,0 +1,683 @@
+@keyframes blink {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+
+@keyframes future-bg-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes future-glow {
+  0%, 100% { box-shadow: 0 0 10px #00f0ff, 0 0 20px #7f5bff; }
+  50% { box-shadow: 0 0 20px #ff4ecb, 0 0 35px #7f5bff; }
+}
+
+@keyframes matrix-glow {
+  0%, 100% { text-shadow: 0 0 6px #00ff41, 0 0 12px #00ff41; }
+  50% { text-shadow: 0 0 14px #00ff41, 0 0 28px #00ff41; }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #000080;
+  background-image:
+    repeating-linear-gradient(45deg, #000066 0, #000066 2px, transparent 2px, transparent 12px),
+    repeating-linear-gradient(-45deg, #000066 0, #000066 2px, transparent 2px, transparent 12px);
+  color: #00ff00;
+  font-family: "Comic Sans MS", "Chalkboard SE", cursive, sans-serif;
+}
+
+.page {
+  max-width: 900px;
+  margin: 0 auto;
+  background: #000020;
+  border: 6px ridge #c0c0c0;
+}
+
+.top-marquee,
+.bottom-marquee {
+  background: #000;
+  color: #ffff00;
+  font-weight: bold;
+  padding: 4px 0;
+  border-bottom: 2px dashed magenta;
+}
+
+.site-header {
+  text-align: center;
+  padding: 16px 8px;
+  background: linear-gradient(180deg, #ff00ff 0%, #800080 100%);
+  border-bottom: 4px double #00ffff;
+}
+
+.site-header h1 {
+  font-size: 2.6rem;
+  margin: 0;
+  color: #ffff00;
+  text-shadow: 2px 2px 0 #ff0000, -1px -1px 0 #00ffff;
+  letter-spacing: 2px;
+}
+
+.subtitle {
+  color: #00ffff;
+  font-weight: bold;
+  margin: 6px 0 10px;
+}
+
+.construction-banner {
+  display: inline-block;
+  background: #ffff00;
+  color: #000;
+  border: 3px dashed #ff0000;
+  padding: 4px 10px;
+  font-weight: bold;
+  font-size: 0.9rem;
+}
+
+.blink {
+  animation: blink 1s step-start infinite;
+}
+
+.main-layout {
+  display: flex;
+  gap: 0;
+  background: #101040;
+}
+
+.sidebar {
+  width: 220px;
+  flex-shrink: 0;
+  background: #000040;
+  border-right: 4px ridge #c0c0c0;
+  padding: 10px;
+}
+
+.nav-box, .counter-box, .webring {
+  background: #000060;
+  border: 2px solid #00ffff;
+  padding: 8px;
+  margin-bottom: 14px;
+  font-size: 0.85rem;
+}
+
+.nav-box h2 {
+  color: #ff66ff;
+  font-size: 1rem;
+  margin: 0 0 6px;
+  border-bottom: 1px dotted #00ffff;
+}
+
+.nav-box ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.nav-box li {
+  margin: 4px 0;
+}
+
+.nav-box a {
+  color: #00ff00;
+  text-decoration: none;
+}
+
+.nav-box a:hover {
+  color: #ffff00;
+  text-decoration: underline;
+}
+
+.counter-box {
+  text-align: center;
+  color: #ffff00;
+}
+
+.odometer {
+  background: #000;
+  color: #ff0000;
+  font-family: "Courier New", monospace;
+  font-weight: bold;
+  font-size: 1.3rem;
+  letter-spacing: 4px;
+  padding: 4px;
+  border: 2px inset #888;
+  margin-top: 4px;
+}
+
+.webring {
+  color: #00ffff;
+  text-align: center;
+  font-size: 0.8rem;
+}
+
+.chat-area {
+  flex: 1;
+  padding: 16px;
+}
+
+.chat-window {
+  background: #c0c0c0;
+  border: 3px outset #eee;
+  box-shadow: 4px 4px 0 #000;
+}
+
+.chat-titlebar {
+  background: linear-gradient(180deg, #000080, #1084d0);
+  color: #fff;
+  font-weight: bold;
+  padding: 4px 8px;
+  font-family: "Courier New", monospace;
+}
+
+.chat-log {
+  height: 360px;
+  overflow-y: auto;
+  background: #000;
+  color: #00ff00;
+  font-family: "Courier New", monospace;
+  padding: 10px;
+  font-size: 0.95rem;
+  border-bottom: 2px solid #888;
+}
+
+.msg {
+  margin-bottom: 10px;
+  line-height: 1.4;
+}
+
+.msg .who {
+  font-weight: bold;
+  margin-right: 4px;
+}
+
+.msg.bot .who {
+  color: #00ffff;
+}
+
+.msg.user .who {
+  color: #ffff00;
+}
+
+.msg.error .who {
+  color: #ff0000;
+}
+
+.chat-form {
+  display: flex;
+  gap: 6px;
+  padding: 8px;
+  background: #c0c0c0;
+}
+
+.chat-form input {
+  flex: 1;
+  font-family: "Courier New", monospace;
+  font-size: 1rem;
+  padding: 6px;
+  border: 2px inset #888;
+  background: #000;
+  color: #00ff00;
+}
+
+.chat-form button {
+  font-family: "Comic Sans MS", cursive, sans-serif;
+  font-weight: bold;
+  background: linear-gradient(180deg, #ffff00, #ff9900);
+  border: 2px outset #fff;
+  padding: 6px 14px;
+  cursor: pointer;
+}
+
+.chat-form button:active {
+  border-style: inset;
+}
+
+.site-footer {
+  text-align: center;
+  padding: 12px;
+  background: #000;
+  color: #00ffff;
+  font-size: 0.8rem;
+  border-top: 4px double #ff00ff;
+}
+
+/* ===== Matrix rain canvas (year 3000 theme) ===== */
+
+#matrix-canvas {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  display: none;
+  pointer-events: none;
+}
+
+body.year3000-theme #matrix-canvas {
+  display: block;
+}
+
+/* ===== Mode switcher (time travel buttons) ===== */
+
+.mode-switcher {
+  position: fixed;
+  top: 14px;
+  right: 14px;
+  z-index: 1000;
+  display: flex;
+  gap: 6px;
+}
+
+.mode-btn {
+  font-family: "Comic Sans MS", cursive, sans-serif;
+  font-weight: bold;
+  font-size: 0.8rem;
+  padding: 9px 12px;
+  border-radius: 6px;
+  border: 2px outset #fff;
+  background: linear-gradient(180deg, #e0e0e0, #a0a0a0);
+  color: #000;
+  cursor: pointer;
+  box-shadow: 3px 3px 0 #000;
+  opacity: 0.75;
+}
+
+.mode-btn:active {
+  border-style: inset;
+}
+
+.mode-btn.active {
+  opacity: 1;
+  background: linear-gradient(180deg, #ffff00, #ff9900);
+  transform: translateY(-1px);
+}
+
+body.future-theme .mode-btn {
+  font-family: "Orbitron", "Segoe UI", sans-serif;
+  border: 1px solid rgba(0, 240, 255, 0.4);
+  border-radius: 999px;
+  background: linear-gradient(135deg, #0f1033, #1b2250);
+  color: #7f8ad1;
+  box-shadow: none;
+}
+
+body.future-theme .mode-btn.active {
+  color: #00f0ff;
+  box-shadow: 0 0 12px rgba(0, 240, 255, 0.6);
+  border-color: rgba(0, 240, 255, 0.8);
+}
+
+body.year3000-theme .mode-btn {
+  font-family: "Share Tech Mono", monospace;
+  border: 1px solid rgba(0, 255, 65, 0.4);
+  border-radius: 3px;
+  background: #000;
+  color: #0a6b1f;
+  box-shadow: none;
+}
+
+body.year3000-theme .mode-btn.active {
+  color: #00ff41;
+  box-shadow: 0 0 10px rgba(0, 255, 65, 0.7);
+  border-color: #00ff41;
+}
+
+/* ===== 2036 FUTURE THEME ===== */
+
+body.future-theme {
+  background: linear-gradient(120deg, #05010f, #0d0630, #140834, #05010f);
+  background-size: 300% 300%;
+  animation: future-bg-shift 18s ease infinite;
+  color: #e8f4ff;
+  font-family: "Orbitron", "Segoe UI", sans-serif;
+}
+
+body.future-theme .page {
+  background: rgba(10, 8, 35, 0.6);
+  border: 1px solid rgba(127, 91, 255, 0.4);
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 0 40px rgba(127, 91, 255, 0.25);
+  backdrop-filter: blur(6px);
+}
+
+body.future-theme .top-marquee,
+body.future-theme .bottom-marquee {
+  background: rgba(0, 0, 0, 0.3);
+  color: #00f0ff;
+  border-bottom: none;
+  border-top: 1px solid rgba(0, 240, 255, 0.3);
+  letter-spacing: 1px;
+}
+
+body.future-theme .site-header {
+  background: radial-gradient(circle at 50% 0%, rgba(127, 91, 255, 0.35), transparent 70%);
+  border-bottom: 1px solid rgba(0, 240, 255, 0.3);
+  padding: 32px 16px 20px;
+}
+
+body.future-theme .site-header h1 {
+  font-size: 2.4rem;
+  font-weight: 800;
+  letter-spacing: 4px;
+  color: #ffffff;
+  background: linear-gradient(90deg, #00f0ff, #7f5bff, #ff4ecb);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: none;
+  animation: none;
+  opacity: 1 !important;
+}
+
+body.future-theme .subtitle {
+  color: #9fb4ff;
+  font-weight: 400;
+  letter-spacing: 1px;
+}
+
+body.future-theme .construction-banner {
+  display: inline-block;
+  background: rgba(0, 240, 255, 0.08);
+  color: #00f0ff;
+  border: 1px solid rgba(0, 240, 255, 0.5);
+  border-radius: 999px;
+  padding: 6px 16px;
+  font-family: "Segoe UI", sans-serif;
+  animation: future-glow 3s ease-in-out infinite;
+}
+
+body.future-theme .blink {
+  animation: none;
+  opacity: 1;
+}
+
+body.future-theme .main-layout {
+  background: transparent;
+}
+
+body.future-theme .sidebar {
+  background: rgba(14, 12, 45, 0.5);
+  border-right: 1px solid rgba(127, 91, 255, 0.3);
+}
+
+body.future-theme .nav-box,
+body.future-theme .counter-box,
+body.future-theme .webring {
+  background: rgba(20, 18, 60, 0.55);
+  border: 1px solid rgba(0, 240, 255, 0.25);
+  border-radius: 12px;
+}
+
+body.future-theme .nav-box h2 {
+  color: #ff4ecb;
+  border-bottom: 1px solid rgba(255, 78, 203, 0.3);
+  font-weight: 600;
+}
+
+body.future-theme .nav-box a {
+  color: #d6e4ff;
+}
+
+body.future-theme .nav-box a:hover {
+  color: #00f0ff;
+}
+
+body.future-theme .counter-box {
+  color: #9fb4ff;
+}
+
+body.future-theme .odometer {
+  background: rgba(0, 0, 0, 0.4);
+  color: #00f0ff;
+  border: 1px solid rgba(0, 240, 255, 0.4);
+  font-family: "Orbitron", monospace;
+  box-shadow: 0 0 10px rgba(0, 240, 255, 0.3) inset;
+}
+
+body.future-theme .webring {
+  color: #9fb4ff;
+}
+
+body.future-theme .chat-window {
+  background: rgba(16, 14, 48, 0.6);
+  border: 1px solid rgba(127, 91, 255, 0.4);
+  border-radius: 16px;
+  box-shadow: 0 0 30px rgba(0, 240, 255, 0.15);
+  overflow: hidden;
+}
+
+body.future-theme .chat-titlebar {
+  background: linear-gradient(90deg, #1b2250, #2a1750);
+  color: #00f0ff;
+  font-family: "Orbitron", sans-serif;
+  letter-spacing: 1px;
+  border-bottom: 1px solid rgba(0, 240, 255, 0.3);
+}
+
+body.future-theme .chat-log {
+  background: rgba(5, 4, 20, 0.7);
+  color: #e8f4ff;
+  font-family: "Segoe UI", sans-serif;
+  border-bottom: 1px solid rgba(127, 91, 255, 0.3);
+}
+
+body.future-theme .msg.bot .who {
+  color: #ff4ecb;
+}
+
+body.future-theme .msg.user .who {
+  color: #00f0ff;
+}
+
+body.future-theme .msg.error .who {
+  color: #ff5a7a;
+}
+
+body.future-theme .chat-form {
+  background: rgba(16, 14, 48, 0.6);
+}
+
+body.future-theme .chat-form input {
+  font-family: "Segoe UI", sans-serif;
+  background: rgba(5, 4, 20, 0.7);
+  color: #e8f4ff;
+  border: 1px solid rgba(0, 240, 255, 0.4);
+  border-radius: 8px;
+}
+
+body.future-theme .chat-form button {
+  font-family: "Orbitron", sans-serif;
+  background: linear-gradient(135deg, #00f0ff, #7f5bff);
+  color: #05010f;
+  border: none;
+  border-radius: 8px;
+  box-shadow: 0 0 14px rgba(0, 240, 255, 0.5);
+}
+
+body.future-theme .site-footer {
+  background: transparent;
+  color: #9fb4ff;
+  border-top: 1px solid rgba(127, 91, 255, 0.3);
+}
+
+/* ===== YEAR 3000 THEME (Matrix) ===== */
+
+body.year3000-theme {
+  background: #000;
+  color: #00ff41;
+  font-family: "Share Tech Mono", monospace;
+}
+
+body.year3000-theme .page {
+  background: rgba(0, 5, 0, 0.55);
+  border: 1px solid rgba(0, 255, 65, 0.35);
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 0 40px rgba(0, 255, 65, 0.2);
+  backdrop-filter: blur(1px);
+}
+
+body.year3000-theme .top-marquee,
+body.year3000-theme .bottom-marquee {
+  background: rgba(0, 0, 0, 0.6);
+  color: #00ff41;
+  border-bottom: 1px solid rgba(0, 255, 65, 0.3);
+  border-top: 1px solid rgba(0, 255, 65, 0.3);
+  letter-spacing: 1px;
+}
+
+body.year3000-theme .site-header {
+  background: radial-gradient(circle at 50% 0%, rgba(0, 255, 65, 0.12), transparent 70%);
+  border-bottom: 1px solid rgba(0, 255, 65, 0.3);
+  padding: 32px 16px 20px;
+}
+
+body.year3000-theme .site-header h1 {
+  font-size: 2.4rem;
+  font-weight: 700;
+  letter-spacing: 6px;
+  color: #00ff41;
+  text-shadow: none;
+  animation: matrix-glow 2.4s ease-in-out infinite;
+  opacity: 1 !important;
+}
+
+body.year3000-theme .subtitle {
+  color: #0dbb3c;
+  font-weight: 400;
+  letter-spacing: 1px;
+}
+
+body.year3000-theme .construction-banner {
+  display: inline-block;
+  background: rgba(0, 255, 65, 0.06);
+  color: #00ff41;
+  border: 1px solid rgba(0, 255, 65, 0.5);
+  border-radius: 3px;
+  padding: 6px 16px;
+  font-family: "Share Tech Mono", monospace;
+}
+
+body.year3000-theme .blink {
+  animation: matrix-glow 1.6s ease-in-out infinite;
+  opacity: 1;
+}
+
+body.year3000-theme .main-layout {
+  background: transparent;
+}
+
+body.year3000-theme .sidebar {
+  background: rgba(0, 5, 0, 0.5);
+  border-right: 1px solid rgba(0, 255, 65, 0.25);
+}
+
+body.year3000-theme .nav-box,
+body.year3000-theme .counter-box,
+body.year3000-theme .webring {
+  background: rgba(0, 10, 0, 0.55);
+  border: 1px solid rgba(0, 255, 65, 0.25);
+  border-radius: 4px;
+}
+
+body.year3000-theme .nav-box h2 {
+  color: #00ff41;
+  border-bottom: 1px solid rgba(0, 255, 65, 0.3);
+  font-weight: 600;
+}
+
+body.year3000-theme .nav-box a {
+  color: #0dbb3c;
+}
+
+body.year3000-theme .nav-box a:hover {
+  color: #00ff41;
+  text-shadow: 0 0 8px #00ff41;
+}
+
+body.year3000-theme .counter-box {
+  color: #0dbb3c;
+}
+
+body.year3000-theme .odometer {
+  background: rgba(0, 0, 0, 0.6);
+  color: #00ff41;
+  border: 1px solid rgba(0, 255, 65, 0.4);
+  font-family: "Share Tech Mono", monospace;
+  box-shadow: 0 0 10px rgba(0, 255, 65, 0.3) inset;
+}
+
+body.year3000-theme .webring {
+  color: #0dbb3c;
+}
+
+body.year3000-theme .chat-window {
+  background: rgba(0, 8, 0, 0.6);
+  border: 1px solid rgba(0, 255, 65, 0.35);
+  border-radius: 6px;
+  box-shadow: 0 0 30px rgba(0, 255, 65, 0.15);
+  overflow: hidden;
+}
+
+body.year3000-theme .chat-titlebar {
+  background: linear-gradient(90deg, #001a06, #002b0a);
+  color: #00ff41;
+  font-family: "Share Tech Mono", monospace;
+  letter-spacing: 1px;
+  border-bottom: 1px solid rgba(0, 255, 65, 0.3);
+}
+
+body.year3000-theme .chat-log {
+  background: rgba(0, 3, 0, 0.75);
+  color: #00ff41;
+  font-family: "Share Tech Mono", monospace;
+  border-bottom: 1px solid rgba(0, 255, 65, 0.3);
+}
+
+body.year3000-theme .msg.bot .who {
+  color: #00ff41;
+  text-shadow: 0 0 6px #00ff41;
+}
+
+body.year3000-theme .msg.user .who {
+  color: #8cff8c;
+}
+
+body.year3000-theme .msg.error .who {
+  color: #ff5a5a;
+}
+
+body.year3000-theme .chat-form {
+  background: rgba(0, 8, 0, 0.6);
+}
+
+body.year3000-theme .chat-form input {
+  font-family: "Share Tech Mono", monospace;
+  background: rgba(0, 3, 0, 0.75);
+  color: #00ff41;
+  border: 1px solid rgba(0, 255, 65, 0.4);
+  border-radius: 3px;
+}
+
+body.year3000-theme .chat-form button {
+  font-family: "Share Tech Mono", monospace;
+  background: #00ff41;
+  color: #001a06;
+  border: none;
+  border-radius: 3px;
+  box-shadow: 0 0 14px rgba(0, 255, 65, 0.5);
+}
+
+body.year3000-theme .site-footer {
+  background: transparent;
+  color: #0dbb3c;
+  border-top: 1px solid rgba(0, 255, 65, 0.3);
+}
